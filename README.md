@@ -6,4 +6,5 @@ A laravel blog website used as a sample of my task
 ![Screenshot](images/screenshotx.png)
 
 Thanks, <br>
-Rana Bepari
+Rana Bepari <br>
+<a href="https://rana.meranaint.com/">https://rana.meranaint.com/</a>
