@@ -9,7 +9,7 @@ A laravel blog website used as a sample of my task
 <center><h3>Admin Panel</h3> </center><br>
 <img src="images/blog_admin.png">
 <br>
-<center><h3>Seller Panel</h3></center> <br>
+<center><h3>Author Panel</h3></center> <br>
 <img src="images/blog_author.png">
 <br>
 <center><h3>User Panel</h3></center> <br>
