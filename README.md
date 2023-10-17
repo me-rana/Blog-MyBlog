@@ -5,6 +5,16 @@ A laravel blog website used as a sample of my task
 
 ![Screenshot](images/screenshotx.png)
 
+<br>
+<center><h3>Admin Panel</h3> </center><br>
+<img src="images/blog_admin.png">
+<br>
+<center><h3>Seller Panel</h3></center> <br>
+<img src="images/blog_author.png">
+<br>
+<center><h3>User Panel</h3></center> <br>
+<img src="images/blog_user.png">
+
 Thanks, <br>
 Rana Bepari <br>
 <a href="https://rana.meranaint.com/">https://rana.meranaint.com/</a>
