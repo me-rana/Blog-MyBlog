@@ -2,9 +2,9 @@
 A laravel blog website used as a sample of my task
 
 <a href="https://blog.rana.meranaint.com/">Live Preview of Blog Website</a>
-
-![Screenshot](images/screenshotx.png)
 <br> {Class "PDO" not found -----> Started working to fixed this}
+![Screenshot](images/screenshotx.png)
+
 <br>
 <center><h3>Admin Panel</h3> </center><br>
 <img src="images/blog_admin.png">
