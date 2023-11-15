@@ -58,10 +58,13 @@
                     </div>
 
                 </div>
+                
                 <!-- Side widgets-->
-                <div class="col-lg-4">
+                
+                
                     <!-- Search widget-->
                     @include('frontend.theme.search')
+                
                     <!-- Categories widget-->
                     <div class="card mb-4">
                         <div class="card-header">Categories</div>
@@ -84,6 +87,7 @@
                             </div>
                         </div>
                     </div>
+                
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Side Widget</div>
@@ -91,5 +95,6 @@
                     </div>
                 </div>
             </div>
+        
         </div>
 @endsection
