@@ -1,6 +1,3 @@
-@php
-    $title = 'Contact Us';
-@endphp
 @extends('frontend.theme.content')
 @section('main-content')
 <style>
@@ -118,20 +115,24 @@ html {
         @csrf
         <div class="mb-3">
             <label class="form-label">Name</label>
-            <input name="name" type="text" class="form-control" placeholder="Your Name" required>
+            <input name="name" type="text" class="form-control" placeholder="Your Name">
+            <small><span class="text-danger"> @error('name') {{$message}} @enderror </span></small>
           </div>
           <div class="mb-3">
             <label class="form-label">Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Your Email" required>
+            <input name="email" type="email" class="form-control" placeholder="Your Email">
+            <small><span class="text-danger"> @error('email') {{$message}} @enderror </span></small>
           </div>
 
           <div class="mb-3">
             <label class="form-label">Message</label>
-            <textarea name="message" class="form-control" id="" rows="10" required></textarea>
+            <textarea name="message" class="form-control" id="" rows="10"></textarea>
+            <small><span class="text-danger"> @error('message') {{$message}} @enderror </span></small>
           </div>
           <div class="mb-3">
             <label class="form-label">Contact No</label>
-            <input name="contact" type="text" class="form-control" placeholder="Phone No(Whatsapp)" required>
+            <input name="contact" type="text" class="form-control" placeholder="Phone No(Whatsapp)">
+            <small><span class="text-danger"> @error('contact') {{$message}} @enderror </span></small>
           </div>
           <button class="btn btn-success" type="submit">Submit</button>
     </form>

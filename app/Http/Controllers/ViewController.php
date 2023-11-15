@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Helper\BlogController;
+use App\Http\Controllers\Helper\CategoryController;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
@@ -10,27 +12,12 @@ use App\Models\Contact;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Arr;
+
 
 
 class ViewController extends Controller
 {
-    //
-    function index(){
-        $PostCount = 8;
-        $data = Post::where('status','1')->latest()->paginate($PostCount);
-        $all_category = Category::all();
-        $count = count($data);
-        $rand_post = rand(1,$count);
-        $feature_post = Post::first();
-        return view ('frontend.index',compact('data','all_category','feature_post'))->with('i',(request()->input('page',1)-1)*$PostCount);
-    }
-    function about(){
-        return view('frontend.about');
-    }
-    function contact(){
-        return view('frontend.contact');
-    }
+
     function access(){
         if(Auth::user()->role == 1){
             return redirect()->route('author.dashboard');
@@ -46,51 +33,51 @@ class ViewController extends Controller
         }
     }
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+
+    //Support Function
+    function support(){
+        $all_category = Category::all();
+        $feature_post = Post::first();
+        $support_data = compact('all_category', 'feature_post');
+        return $support_data;
     }
-    public function replies()
-    {
-        return $this->hasMany(Comment::class, 'parent_id');
+    // Main Task Started from here ------------------------------------------------------------------>
+    function index(){
+        $data = $this->support();
+        $posts = new BlogController();
+        $action = $posts->read('frontend.index', 8, $data);
+        return $action;
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
-    }
     protected function singlePost($slug){
-        $article = Post::where('slug', $slug)->first();
-        $uid = $article->author_id;
-        $author_info = User::where('id',$uid)->first();
-        $category_info = Category::where('id',$article->category)->first();
-        $all_category = Category::all();
-        $comments = Comment::rightJoin('users','comments.user_id','=','users.id')
-                    ->where('parent_id',null)
-                    ->where('post_id',$article->id)
-                    ->select('comments.*','users.name')
-                    ->get();
-        $replies = Comment::rightJoin('users','comments.user_id','=','users.id')
-                    ->where('post_id',$article->id)
-
-                    ->select('comments.*','users.name')
-                    ->get();
-
-
-        return view('frontend.singlepost', compact('article','author_info','category_info','all_category','comments','replies'));
+        $support = $this->support();
+        $post = new BlogController();
+        $action = $post->read_one('frontend.singlepost', $slug, $support);
+        return $action;
     }
 
+    function about(){
+        return view('frontend.about');
+    }
 
-
+    function contact(){
+        return view('frontend.contact');
+    }
+    function myquery(Request $request){
+        $perpage = 8;
+        $data = $this->support();
+        $posts = Post::where('title','LIKE','%'.$request->myquery.'%')->latest()->paginate($perpage);
+        return view('frontend.index',compact('posts'))->with($data)->with('i',(request()->input('page',1)-1)*$perpage);
+    }
+    
     function category($slug){
-        $PostCount = 8;
-        $cat_info= Category::where('cat_slug', $slug)->first();
-        $data = Post::where('category',$cat_info->id)->paginate($PostCount);
-        $all_category = Category::all();
-        return view ('frontend.category',compact('data','all_category','cat_info'))->with('i',(request()->input('page',1)-1)*$PostCount);
+        $data = $this->support();
+        $category = new CategoryController();
+        $action = $category->read('frontend.category', $slug, $data);
+        return $action;
     }
     protected function form_submit(Request $req): RedirectResponse{
-        $validated = $req->validate([
+        $req->validate([
             'name' => 'required',
             'email' => 'required|email',
             'message' => 'required',

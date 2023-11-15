@@ -23,6 +23,7 @@ Route::get('/category/{slug}', [ViewController::class,'category'])->name('single
 Route::get('/about', [ViewController::class,'about'])->name('about');
 Route::get('/contact', [ViewController::class,'contact'])->name('contact');
 Route::post('/submit-contact', [ViewController::class,'form_submit'])->name('contact.submit');
+Route::get('/search',[ViewController::class, 'myquery'])->name('search.result');
 Route::get('/access', [ViewController::class,'access'])->name('access');
 Route::post('/submit-comment',[ViewController::class,'comment'])->name('comment.submit');
 

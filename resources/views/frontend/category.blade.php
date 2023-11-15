@@ -1,19 +1,16 @@
-@php
-    $title = 'Categories';
-@endphp
 @extends('frontend.theme.content')
 @section('main-content')
 <br><br>
 
   <!-- Page content-->
         <div class="container">
-            <h3 class="text-center">{{$cat_info->cat_name}}</h3>
+            <h3 class="text-center">{{$category->cat_name}}</h3>
             <div class="row row align-items-center">
                 <div class="col-6">
-                    <center><img src="../storage/image/{{$cat_info->cat_path}}" height="200px" /></center>
+                    <center><img src="../storage/image/{{$category->cat_path}}" height="200px" /></center>
                 </div>
                 <div class="col-6 d-flex justify-content-center">
-                    {{$cat_info->cat_des}}
+                    {{$category->cat_des}}
                 </div>
             </div>
 <br><br>
@@ -30,9 +27,10 @@
 
                         @php
                         $i=1;
+                        $paginate = 8;
                     @endphp
-                   @if (count($data) > 0)
-                    @foreach ($data as $row)
+                   @if (count($category->getPosts) > 0)
+                    @foreach ($category->getPosts()->paginate($paginate) as $row)
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
@@ -55,7 +53,7 @@
 
 {{-- Fixed --}}
  <!-- Pagination-->
-            {{$data->links()}}
+{{ $category->getPosts()->paginate($paginate)->links('pagination::bootstrap-5') }}
 
                     </div>
 
@@ -63,15 +61,7 @@
                 <!-- Side widgets-->
                 <div class="col-lg-4">
                     <!-- Search widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Search</div>
-                        <div class="card-body">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                            </div>
-                        </div>
-                    </div>
+                    @include('frontend.theme.search')
                     <!-- Categories widget-->
                     <div class="card mb-4">
                         <div class="card-header">Categories</div>

@@ -1,6 +1,3 @@
-@php
-    $title = 'About Us';
-@endphp
 @extends('frontend.theme.content')
 @section('main-content')
 <style>

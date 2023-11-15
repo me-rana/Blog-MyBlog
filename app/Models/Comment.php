@@ -10,4 +10,8 @@ class Comment extends Model
 {
     use SoftDeletes;
     use HasFactory;
+
+    public function getWhoComment(){
+        return $this->belongsTo(User::class,'user_id','id');
+    }
 }
