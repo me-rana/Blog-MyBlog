@@ -7,7 +7,7 @@
             <h3 class="text-center">{{$category->cat_name}}</h3>
             <div class="row row align-items-center">
                 <div class="col-6">
-                    <center><img src="../storage/image/{{$category->cat_path}}" height="200px" /></center>
+                    <center><img src="../../{{$category->cat_path}}" height="200px" /></center>
                 </div>
                 <div class="col-6 d-flex justify-content-center">
                     {{$category->cat_des}}
