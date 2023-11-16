@@ -41,6 +41,14 @@
     </nav>
   </div><!-- End Page Title -->
 <div class="container customfont">
+  
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
+
 <table class="table">
     <thead>
       <tr>
@@ -67,7 +75,7 @@
           echo $row->cat_des;
         @endphp</td>
 
-        <td><img height="200px" src='http://127.0.0.1:8000/storage/image/{{$row->cat_path}}'> </td>
+        <td><img height="200px" src='../../{{$row->cat_path}}'> </td>
         <td><form action="../author/delete-category/{{$row->id}}" method="post">
             @csrf
             <input class="btn btn-danger" type="submit" value="Delete" disabled>

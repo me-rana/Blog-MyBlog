@@ -73,7 +73,7 @@ class ViewController extends Controller
     function category($slug){
         $data = $this->support();
         $category = new CategoryController();
-        $action = $category->read('frontend.category', $slug, $data);
+        $action = $category->read_one('frontend.category', $slug, $data);
         return $action;
     }
     protected function form_submit(Request $req): RedirectResponse{

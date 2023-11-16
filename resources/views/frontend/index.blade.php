@@ -32,7 +32,7 @@
                     <div class="card mb-4">
                         <div class="card mb-4">
                             @if($feature_post != null)
-                            <a href="#!"><img height="400px" class="card-img-top" src="../storage/image/{{$feature_post->image_path}}" alt="..." /></a>
+                            <a href="#!"><img height="400px" class="card-img-top" src="../../{{$feature_post->image_path}}" alt="..." /></a>
                             <div class="card-body">
                                 <div class="small text-muted">{{$feature_post->updated_at->format('j F, Y')}}</div>
                                 <h2 class="card-title h4">{{substr($feature_post->title, 0, 50)}}</h2>
@@ -44,7 +44,7 @@
                             </div>
                             @endif
                     </div>
-                </div>
+               
                     <!-- Nested row for non-featured blog posts-->
                     <div class="row">
 
@@ -57,7 +57,7 @@
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img height="200px" class="card-img-top" src="../storage/image/{{$row->image_path}}" alt="..." /></a>
+                                <a href="#!"><img height="200px" class="card-img-top" src="../../{{$row->image_path}}" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">{{$row->updated_at->format('j F, Y')}}</div>
                                     <h2 class="card-title h4">{{substr($row->title, 0, 50)}}</h2>
@@ -77,7 +77,7 @@
 {{-- Fixed --}}
  <!-- Pagination-->
  {{$posts->links()}}
-
+</div>
                     </div>
 
                 </div>

@@ -15,7 +15,7 @@
     </header>
 
  <!-- Preview image figure-->
- <figure class="mb-4"><center><img class="img-fluid rounded" src="../storage/image/{{$read_one->image_path}}" alt="..." /></center></figure>
+ <figure class="mb-4"><center><img class="img-fluid rounded" src="../../{{$read_one->image_path}}" alt="..." /></center></figure>
  <!-- Post content-->
  <section class="mb-5 text-justify">
     @php
@@ -58,7 +58,7 @@
 <div class="card mb-4">
  <div class="card-header">Search</div>
  <div class="card-body">
-    <form action="{{route('search.result')}}">
+    <form action="{{route('Search Result')}}">
         <div class="input-group">
             <input name="myquery" class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
             <button class="btn btn-primary" id="button-search" type="button">Go!</button>

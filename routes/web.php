@@ -17,13 +17,13 @@ use App\Http\Controllers\VisitorController;
 |
 */
 
-Route::get('/', [ViewController::class,'index'])->name('home');
-Route::get('/posts/{slug}', [ViewController::class,'singlePost'])->name('singlepost');
-Route::get('/category/{slug}', [ViewController::class,'category'])->name('singlecategory');
-Route::get('/about', [ViewController::class,'about'])->name('about');
-Route::get('/contact', [ViewController::class,'contact'])->name('contact');
+Route::get('/', [ViewController::class,'index'])->name('Home');
+Route::get('/posts/{slug}', [ViewController::class,'singlePost'])->name('Single Post');
+Route::get('/category/{slug}', [ViewController::class,'category'])->name('Single Category');
+Route::get('/about', [ViewController::class,'about'])->name('About');
+Route::get('/contact', [ViewController::class,'contact'])->name('Contact');
 Route::post('/submit-contact', [ViewController::class,'form_submit'])->name('contact.submit');
-Route::get('/search',[ViewController::class, 'myquery'])->name('search.result');
+Route::get('/search',[ViewController::class, 'myquery'])->name('Search Result');
 Route::get('/access', [ViewController::class,'access'])->name('access');
 Route::post('/submit-comment',[ViewController::class,'comment'])->name('comment.submit');
 

@@ -2,6 +2,9 @@
 @section('main-content')
 
 
+
+
+
     <style>
     @import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
     .customfont{
@@ -32,6 +35,13 @@
   </div><!-- End Page Title -->
 
 <div class="container customfont">
+  <br>
+  @if (session('message'))
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong>Success!</strong> {{session('message')}}
+</div>
+@endif
 
 <h3 class="text-center">Lifetime Posts of the Website</h3>
 <p class="text-center text-danger">You can modify or Terminate any posts</p>
@@ -69,7 +79,7 @@
           @php echo Str::words($row->description,15); @endphp</td>
         <td>{{$row->created_at}}</td>
         <td>{{$row->tag}}</td>
-        <td><img height="100px" src='http://127.0.0.1:8000/storage/image/{{$row->image_path}}'> </td>
+        <td><img height="100px" src='../../{{$row->image_path}}'> </td>
         <td>
             <a href="../author/update-post/{{$row->id}}"><button class="btn btn-success">Edit</button></a>
             <br>

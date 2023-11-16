@@ -21,6 +21,14 @@
     </nav>
   </div><!-- End Page Title -->
 <div class="container customfont">
+  
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
+
     <div class="card pt-3">
         <div class="container">
             <h3 class="text-center">Add a New Category</h3>

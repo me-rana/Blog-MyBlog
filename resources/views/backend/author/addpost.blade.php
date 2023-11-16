@@ -34,15 +34,22 @@
   </div><!-- End Page Title -->
 <div class="container customfont">
     <br>
+    @if (session('message'))
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <strong>Success!</strong> {{session('message')}}
+    </div>
+    @endif
+  
     <div class="card">
        <div class="container">
         <br>
-        <h3 class="text-center sameSizeFont">{{$title ?? ''}}t</h3>
+        <h3 class="text-center sameSizeFont">{{$title ?? ''}}</h3>
         <p class="text-center text-success dotFont">Made your blog With Valid informations</p>
 
         <form action="{{route('author.storepost')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="id" value="{{$post->id ?? ''}}">
+            <input type="hidden" name="post_id" value="{{$post_id ?? ''}}">
             <div class="mb-3">
                 <label class="form-label">Post Title</label>
                 <input name="title" type="text" id="title" class="form-control" value="{{$post->title ?? ''}}" placeholder="Post Title">

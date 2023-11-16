@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Http\Controllers\Helper\BlogController;
+use App\Http\Controllers\Helper\CategoryController;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthorController extends Controller
@@ -19,9 +21,9 @@ class AuthorController extends Controller
         return view('backend.author.dashboard');
     }
     protected function categories(){
-        $PostCount = 8;
-        $data = Category::latest()->paginate($PostCount);
-        return view('backend.author.categories',compact('data'))->with('i',(request()->input('page',1)-1)*$PostCount);;
+        $categories = new CategoryController();
+        $action = $categories->read('backend.author.categories', 8);
+        return $action;
     }
     public function getslug(Request $req){
         $slug = SlugService::createSlug(Post::class, 'slug', $req->title);
@@ -60,62 +62,21 @@ class AuthorController extends Controller
         $title = "New Post";
         $post = Post::where('id',$id)->first();
         $data = Category::all();
-        return view('backend.author.addpost',compact('data','title','post'));
+        $post_id = $id;
+        return view('backend.author.addpost',compact('data','title','post','post_id'));
     }
     protected function storepost(Request $req){
-         if (is_null($req->id)){
-            $post = new Post();
-         $post->title = $req->title;
-         $post->status = $req->status;
-         $post->slug = $req->slug;
-         $post->tag = $req->tag;
-         $post->description = $req->description;
-         $post->author_id = Auth::user()->id;
-         $post->category = $req->category;
-         //Image
-         if(!is_null($req->file('image'))){
-            $url = $req->file('image')->getClientOriginalName();
-            $image = rand(11111, 99999) . $url;
-            $req->file('image')->storeAs('public/image', $image);
-            $post->image_path = $image;
-         }
-         //
-         $post->save();
-         }
-         else{
-            $post = Post::find($req->id)->first();
-            $post->title = $req->title;
-            $post->status = $req->status;
-            $post->slug = $req->slug;
-            $post->tag = $req->tag;
-            $post->description = $req->description;
-            $post->author_id = Auth::user()->id;
-            $post->category = $req->category;
-            //Image
-            if(!is_null($req->file('image'))){
-                $url = $req->file('image')->getClientOriginalName();
-                $image = rand(11111, 99999) . $url;
-                $req->file('image')->storeAs('public/image', $image);
-                $post->image_path = $image;
-         }
-         //
-         $post->update();
-         }
-         return redirect(route('author.post'));
+        $user_id = Auth::user()->id;
+        $datas = ['title','status','slug','tag','description', 'category'];
+        $post = new BlogController();
+        $action = $post->createOrUpdate(route('author.post'), $req, $datas, $user_id);
+        return $action;
     }
     protected function storecategory(Request $req){
-        $cat = new Category();
-        $cat->cat_name = $req->cat_name;
-        $cat->cat_slug = $req->cat_slug;
-        $cat->cat_des = $req->cat_des;
-        //Image
-        $url = $req->file('image')->getClientOriginalName();
-        $image = rand(11111, 99999) . $url;
-        $req->file('image')->storeAs('public/image', $image);
-        $cat->cat_path = $image;
-        //
-        $cat->save();
-        return redirect(route('author.category'));
+        $datas = ['cat_name', 'cat_des', 'cat_slug'];
+        $category = new CategoryController();
+        $action = $category->create($req, $datas);
+        return $action;
     }
     protected function delete_post($id){
         $data = Post::find($id);
