@@ -34,7 +34,7 @@
                         <div class="col-lg-6">
                             <!-- Blog post-->
                             <div class="card mb-4">
-                                <a href="#!"><img height="200px" class="card-img-top" src="../storage/image/{{$row->image_path}}" alt="..." /></a>
+                                <a href="#!"><img height="200px" class="card-img-top" src="../../{{$row->image_path}}" alt="..." /></a>
                                 <div class="card-body">
                                     <div class="small text-muted">{{$row->updated_at}}</div>
                                     <h2 class="card-title h4">{{substr($row->title, 0, 50)}}</h2>
