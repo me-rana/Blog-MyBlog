@@ -14,13 +14,13 @@ Password : adminx4312 <br>
 <img src="images/blog_admin.png">
 <br>
 <center><h3>Author Panel</h3></center> <br>
-<strong> Login as Admin  </strong> <br>
+<strong> Login as Author  </strong> <br>
 Username : author@test.me <br>
 Password : authorx4312 <br>
 <img src="images/blog_author.png">
 <br>
 <center><h3>User Panel</h3></center> <br>
-<strong> Login as Admin  </strong> <br>
+<strong> Login as User  </strong> <br>
 Username : user@test.me <br>
 Password : userx4312 <br>
 <img src="images/blog_user.png">
