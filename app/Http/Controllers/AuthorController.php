@@ -64,7 +64,7 @@ class AuthorController extends Controller
         $user_id = Auth::user()->id;
         $datas = ['title','status','slug','tag','description', 'category'];
         $post = new BlogController();
-        $action = $post->createOrUpdate(route('author.post'), $req, $datas, $user_id);
+        $action = $post->createOrUpdate($req, $datas, $user_id);
         return $action;
     }
     protected function storecategory(Request $req){
@@ -74,10 +74,10 @@ class AuthorController extends Controller
         return $action;
     }
     protected function delete_post($id){
-        $role = User::where('id',Auth::user()->id)->first();
+        $user = User::where('id',Auth::user()->id)->first();
         $uid = Auth::user()->id;
         $request = new BlogController();
-        $action = $request->delete($id, $uid, $role);
+        $action = $request->delete($id, $uid, $user->role);
         return $action;
         
         

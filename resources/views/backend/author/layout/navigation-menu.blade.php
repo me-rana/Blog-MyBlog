@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link @if(Request::route()->getName() != 'author.dashboard')) collapsed  @endif" href="../access">
+        <a class="nav-link @if(Request::route()->getName() != 'author.dashboard')) collapsed  @endif" href="../../access">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -16,12 +16,12 @@
         </a>
         <ul id="components-nav" class="nav-content @if (Request::route()->getName() != 'author.category' && Request::route()->getName() != 'author.newcategory') collapse @endif" data-bs-parent="#sidebar-nav">
           <li>
-            <a class="@if(Request::route()->getName() == 'author.category') active  @endif" href="../author/categories">
+            <a class="@if(Request::route()->getName() == 'author.category') active  @endif" href="{{ route('author.category') }}">
               <i class="bi bi-circle"></i><span>Categories</span>
             </a>
           </li>
           <li>
-            <a class="@if(Request::route()->getName() == 'author.newcategory') active  @endif" href="../author/add-category">
+            <a class="@if(Request::route()->getName() == 'author.newcategory') active  @endif" href="{{ route('author.newcategory') }}">
             <i class="bi bi-circle"></i><span>Add category</span>
             </a>
           </li>
@@ -34,12 +34,12 @@
         </a>
         <ul id="forms-nav" class="nav-content @if (Request::route()->getName() != 'author.post' && Request::route()->getName() != 'author.newpost') collapse @endif" data-bs-parent="#sidebar-nav">
           <li>
-            <a class="@if(Request::route()->getName() == 'author.post') active  @endif" href="../author/posts">
+            <a class="@if(Request::route()->getName() == 'author.post') active  @endif" href="{{ route(author.post) }}">
               <i class="bi bi-circle"></i><span>Posts</span>
             </a>
           </li>
           <li>
-            <a class="@if(Request::route()->getName() == 'author.newpost') active  @endif" href="../author/add-post">
+            <a class="@if(Request::route()->getName() == 'author.newpost') active  @endif" href="{{ route('author.newpost') }}">
               <i class="bi bi-circle"></i><span>Add Post</span>
             </a>
           </li>
@@ -60,14 +60,14 @@
 
 
       <li class="nav-item">
-        <a class="nav-link @if(Request::route()->getName() != 'author.faq') collapsed  @endif" href="../author/faq">
+        <a class="nav-link @if(Request::route()->getName() != 'author.faq') collapsed  @endif" href="{{ route('author.faq') }}">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link @if(Request::route()->getName() != 'author.contact') collapsed  @endif" href="../author/contact">
+        <a class="nav-link @if(Request::route()->getName() != 'author.contact') collapsed  @endif" href="{{ route('author.contact') }}">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
         </a>

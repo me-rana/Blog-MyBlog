@@ -37,7 +37,7 @@ class BlogController extends Controller
         return view($view_file, compact('read_one'))->with($data);
     }
 
-    function createOrUpdate($view_route ,$request, $datas, $user_id){
+    function createOrUpdate($request, $datas, $user_id){
         if (is_null($request->post_id)){
             $post = new Post();
             foreach ($datas as $data){
@@ -62,7 +62,7 @@ class BlogController extends Controller
             }
             $post->update();
         } 
-        return redirect($view_route)->with('message','Your action is done successfully');
+        return redirect()->back()->with('message','Your action is done successfully');
     }
     public function delete($id, $uid, $role){
         $post = Post::where('id', $id)->first();

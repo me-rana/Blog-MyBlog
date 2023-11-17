@@ -31,6 +31,12 @@
   </div><!-- End Page Title -->
 
 <div class="container customfont">
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
 
 <h3 class="text-center">Lifetime Posts of the Website</h3>
 <p class="text-center text-danger">You can modify or Terminate any posts</p>
@@ -62,7 +68,7 @@
         <td>@php echo Str::words($row->description,15); @endphp </td>
         <td>{{$row->created_at}}</td>
         <td>{{$row->tag}}</td>
-        <td><img height="100px" src='../../storage/image/{{$row->image_path}}'> </td>
+        <td><img height="100px" src='../../{{$row->image_path}}'> </td>
         <td>
             <a href="../admin/update-post/{{$row->id}}"><button class="btn btn-success">Edit</button></a>
             <br>

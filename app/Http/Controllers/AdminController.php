@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Http\Controllers\Helper\BlogController;
+use App\Http\Controllers\Helper\CategoryController;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -18,18 +20,15 @@ class AdminController extends Controller
         return view('backend.admin.dashboard');
     }
     protected function categories(){
-        $PostCount = 8;
-        $data = Category::latest()->paginate($PostCount);
-        return view('backend.admin.categories',compact('data'))->with('i',(request()->input('page',1)-1)*$PostCount);
+       $request = new CategoryController();
+       $action = $request->read('backend.admin.categories', 12);
+       return $action;
     }
     protected function delete_category($id){
-        $data = Category::find($id);
-        if(Auth::user()->role == 2){
-            $data->delete();
-            return redirect( route('admin.category'))->with('message','Product Removed Successfully');
-        }else{
-            return redirect( route('access'))->with('message','Access Denied');
-        }
+        $user = User::where('id',Auth::user()->id)->first();
+        $request = new CategoryController();
+        $action = $request->delete($id, $user->role);
+        return $action;
     }
     protected function newcategory(){
         $title = 'New Category';
@@ -37,49 +36,21 @@ class AdminController extends Controller
     }
     protected function updatecategory($id){
         $title = 'New Category';
-        $category = Category::where('id',$id)->first();
+        $category = Category::where('id', $id)->first();
         $cid = $id;
         return view('backend.admin.addcategory',compact('category','cid','title'));
     }
     protected function storecategory(Request $req){
-        if (is_null($req->cid)){
-            $cat = new Category();
-        $cat->cat_name = $req->cat_name;
-        $cat->cat_slug = $req->cat_slug;
-        $cat->cat_des = $req->cat_des;
-        if(!is_null($req->file('image'))){
-            $url = $req->file('image')->getClientOriginalName();
-            $image = rand(11111, 99999) . $url;
-            $req->file('image')->storeAs('public/image', $image);
-            $cat->cat_path = $image;
-         }
-        $cat->save();
-        }
-        else{
-        $cat = Category::where('id',$cid)->first();
-        $cat->cat_name = $req->cat_name;
-        $cat->cat_slug = $req->cat_slug;
-        $cat->cat_des = $req->cat_des;
-        //Image
-        if(!is_null($req->file('image'))){
-            $url = $req->file('image')->getClientOriginalName();
-            $image = rand(11111, 99999) . $url;
-            $req->file('image')->storeAs('public/image', $image);
-            $cat->cat_path = $image;
-        }
-        $update->save();
-        }
-        return redirect(route('admin.category'));
+        $datas = ['cat_name', 'cat_des', 'cat_slug'];
+        $request = new CategoryController();
+        $action = $request->create($req, $datas);
+        return $action;
     }
     protected function posts(){
-        $PostCount = 8;
-        $posts = Post::rightJoin('categories', 'posts.category', 'categories.id')
-        ->where('posts.deleted_at',NULL)
-        ->where('posts.id','!=',null)
-        ->select('posts.*','categories.cat_name')
-        ->latest()
-        ->paginate($PostCount);
-        return view('backend.admin.posts',compact('posts'))->with('i',(request()->input('page',1)-1)*$PostCount);
+        $posts = new BlogController();
+        $action = $posts->read('backend.admin.posts', 8, null);
+        return $action;
+
     }
     protected function addpost(){
         $title ="New Post";
@@ -100,53 +71,18 @@ class AdminController extends Controller
         return redirect()->back()->with('message','Successfully updated user role');
     }
     protected function storepost(Request $req){
-        if (is_null($req->pid)){
-            $post = new Post();
-         $post->title = $req->title;
-         $post->status = $req->status;
-         $post->slug = $req->slug;
-         $post->tag = $req->tag;
-         $post->description = $req->description;
-         $post->author_id = Auth::user()->id;
-         $post->category = $req->category;
-         //Image
-         if(!is_null($req->file('image'))){
-            $url = $req->file('image')->getClientOriginalName();
-            $image = rand(11111, 99999) . $url;
-            $req->file('image')->storeAs('public/image', $image);
-            $post->image_path = $image;
-         }
-         //
-         $post->save();
-         }
-         else{
-            $post = Post::where('id',$req->pid)->first();
-            $post->title = $req->title;
-            $post->status = $req->status;
-            $post->slug = $req->slug;
-            $post->tag = $req->tag;
-            $post->description = $req->description;
-            $post->category = $req->category;
-            //Image
-            if(!is_null($req->file('image'))){
-                $url = $req->file('image')->getClientOriginalName();
-                $image = rand(11111, 99999) . $url;
-                $req->file('image')->storeAs('public/image', $image);
-                $post->image_path = $image;
-         }
-         //
-         $post->update();
-         }
-        return redirect(route('admin.post'));
+        $user_id = Auth::user()->id;
+        $datas = ['title','status','slug','tag','description', 'category'];
+        $post = new BlogController();
+        $action = $post->createOrUpdate($req, $datas, $user_id);
+        return $action;
    }
    protected function delete_post($id){
-    $data = Post::find($id);
-    if(Auth::user()->role == 2){
-        $data->delete();
-        return redirect( route('admin.post'))->with('message','Product Removed Successfully');
-    }else{
-        return redirect( route('access'))->with('message','Access Denied');
-    }
+        $user = User::where('id',Auth::user()->id)->first();
+        $uid = Auth::user()->id;
+        $request = new BlogController();
+        $action = $request->delete($id, $uid, $user->role);
+        return $action;
 }
 
 

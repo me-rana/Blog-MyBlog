@@ -35,6 +35,12 @@
 </style>
 
 <div class="container customfont">
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
 <table class="table">
     <thead>
       <tr>
@@ -61,7 +67,7 @@
           echo $row->cat_des;
         @endphp</td>
 
-        <td><img height="200px" src='../storage/image/{{$row->cat_path}}'> </td>
+        <td><img height="200px" src='../../{{$row->cat_path}}'> </td>
         <td>
             <a href="../../admin/update-category/{{$row->id}}" target="_blank" rel="noopener noreferrer"><button class="btn btn-success">Edit</button></a>
             <br> <br>

@@ -21,6 +21,12 @@
     </nav>
   </div><!-- End Page Title -->
 <div class="container customfont">
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
     <div class="card pt-3">
         <div class="container">
             <h3 class="text-center">{{$title ?? ''}}</h3>
@@ -45,7 +51,7 @@
                 <div class="mb-3">
                   <label for="" class="form-label">Category Description</label>
                   <textarea class="form-control" name="cat_des" id="" rows="3">{{$category->cat_des ?? ''}}</textarea>
-                </div
+                </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
 

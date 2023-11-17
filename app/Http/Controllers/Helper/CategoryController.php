@@ -50,7 +50,7 @@ class CategoryController extends Controller
         return redirect()->back()->with('message','Category added successfully');
     }
     public function delete($id, $role){
-        $category = Category::where('id', $id);
+        $category = Category::where('id', $id)->first();
         if ($role == 2){
             $this->image_delete($category->cat_path);
             $category->delete();

@@ -34,6 +34,12 @@
     </nav>
   </div><!-- End Page Title -->
 <div class="container customfont">
+  @if (session('message'))
+  <div class="alert alert-primary alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <strong>Success!</strong> {{session('message')}}
+  </div>
+  @endif
     <br>
     <div class="card">
        <div class="container">
@@ -43,7 +49,7 @@
 
         <form action="{{route('admin.storepost')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="pid" value="{{$pid ?? ''}}">
+            <input type="hidden" name="post_id" value="{{$pid ?? ''}}">
             <div class="mb-3">
                 <label class="form-label">Post Title</label>
                 <input name="title" type="text" id="title" class="form-control" value="{{$post->title ?? ''}}" placeholder="Post Title">
