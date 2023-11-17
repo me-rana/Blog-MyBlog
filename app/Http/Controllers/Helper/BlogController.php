@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Helper;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Spatie\FlareClient\View;
@@ -27,8 +28,17 @@ class BlogController extends Controller
         return 0;
     }
 
-    function read($view_file, $perpage, $data){
-        $posts = Post::where('status','1')->where('deleted_at',null)->latest()->paginate($perpage);
+    function read($view_file, $perpage, $data, $uid){
+        $user = User::where('id', $uid)->first();
+        if (isset($user->role)){
+            if ($user->role == 2){
+                $posts = Post::where('status','1')->where('deleted_at',null)->latest()->paginate($perpage);
+            } else{
+                $posts = Post::where('status','1')->where('author_id', $uid)->where('deleted_at',null)->latest()->paginate($perpage);
+            }
+        } else{
+            $posts = Post::where('status','1')->where('deleted_at',null)->latest()->paginate($perpage);
+        } 
         return View($view_file, compact('posts'))->with($data)->with('i',(request()->input('page',1)-1)*$perpage);
     }
 

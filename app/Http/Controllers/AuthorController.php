@@ -40,8 +40,9 @@ class AuthorController extends Controller
         ]);
     }
     protected function posts(){
+        $uid = Auth::user()->id;
         $posts = new BlogController();
-        $action = $posts->read('backend.author.posts', 8, null);
+        $action = $posts->read('backend.author.posts', 8, null, $uid);
         return $action;
 
     }

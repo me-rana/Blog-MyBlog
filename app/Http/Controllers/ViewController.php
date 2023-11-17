@@ -45,7 +45,7 @@ class ViewController extends Controller
     function index(){
         $data = $this->support();
         $posts = new BlogController();
-        $action = $posts->read('frontend.index', 8, $data);
+        $action = $posts->read('frontend.index', 8, $data, null);
         return $action;
     }
 

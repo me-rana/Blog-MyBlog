@@ -47,8 +47,9 @@ class AdminController extends Controller
         return $action;
     }
     protected function posts(){
+        $uid = Auth::user()->id;
         $posts = new BlogController();
-        $action = $posts->read('backend.admin.posts', 8, null);
+        $action = $posts->read('backend.admin.posts', 8, null, $uid);
         return $action;
 
     }
