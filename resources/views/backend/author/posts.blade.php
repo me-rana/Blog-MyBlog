@@ -64,14 +64,14 @@
         @php
                     $i=1;
                 @endphp
-               @if (count($data) > 0)
-                @foreach ($data as $row)
+               @if (count($posts) > 0)
+                @foreach ($posts as $row)
       <tr>
         <th scope="row">{{$i++}}</th>
         <td>{{$row->title}}</td>
         <td>
 
-              {{$row->cat_name}}
+              {{$row->getCategory->cat_name}}
 
 
             </td>
@@ -93,6 +93,6 @@
                @endif
     </tbody>
   </table>
-  {{$data->links()}}
+  {{$posts->links()}}
 </div>
 @endsection

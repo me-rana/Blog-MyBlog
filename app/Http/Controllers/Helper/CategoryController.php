@@ -49,4 +49,12 @@ class CategoryController extends Controller
         $category->save();
         return redirect()->back()->with('message','Category added successfully');
     }
+    public function delete($id, $role){
+        $category = Category::where('id', $id);
+        if ($role == 2){
+            $this->image_delete($category->cat_path);
+            $category->delete();
+        }
+        return redirect()->back()->with('message', 'The Category deleted successfully.');
+    }
 }

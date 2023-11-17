@@ -40,15 +40,10 @@ class AuthorController extends Controller
         ]);
     }
     protected function posts(){
-        $PostCount = 8;
-        $data = Post::rightJoin('categories', 'posts.category', '=', 'categories.id')
-        ->latest('posts.created_at')
-        ->where('author_id', Auth::user()->id)
-        ->where('posts.deleted_at',NULL)
-        ->where('categories.deleted_at', NULL)
-        ->select('posts.*','categories.cat_name')
-        ->paginate($PostCount);
-        return view('backend.author.posts',compact('data'))->with('i',(request()->input('page',1)-1)*$PostCount);
+        $posts = new BlogController();
+        $action = $posts->read('backend.author.posts', 8, null);
+        return $action;
+
     }
     protected function newcategory(){
         return view('backend.author.addcategory');
@@ -79,13 +74,13 @@ class AuthorController extends Controller
         return $action;
     }
     protected function delete_post($id){
-        $data = Post::find($id);
-        if(Auth::user()->role == 1 && Auth::user()->id == $data->author_id){
-            $data->delete();
-            return redirect( route('author.post'))->with('message','Product Removed Successfully');
-        }else{
-            return redirect( route('access'))->with('message','Access Denied');
-        }
+        $role = User::where('id',Auth::user()->id)->first();
+        $uid = Auth::user()->id;
+        $request = new BlogController();
+        $action = $request->delete($id, $uid, $role);
+        return $action;
+        
+        
     }
     protected function delete_category($id){
         $data = Category::find($id);

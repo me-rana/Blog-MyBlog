@@ -28,7 +28,7 @@ class BlogController extends Controller
     }
 
     function read($view_file, $perpage, $data){
-        $posts = Post::where('status','1')->latest()->paginate($perpage);
+        $posts = Post::where('status','1')->where('deleted_at',null)->latest()->paginate($perpage);
         return View($view_file, compact('posts'))->with($data)->with('i',(request()->input('page',1)-1)*$perpage);
     }
 
@@ -63,6 +63,14 @@ class BlogController extends Controller
             $post->update();
         } 
         return redirect($view_route)->with('message','Your action is done successfully');
+    }
+    public function delete($id, $uid, $role){
+        $post = Post::where('id', $id)->first();
+        if ($post->author_id == $uid || $role == 2){
+            $this->image_delete($post->image_path);
+            $post->delete();
+        }
+        return redirect()->back()->with('message', 'The Post deleted successfully.');
     }
 }
 

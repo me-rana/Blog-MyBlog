@@ -46,9 +46,19 @@
                     </div>
                
                     <!-- Nested row for non-featured blog posts-->
-                    <div class="row">
-
-
+                    @if (Route::currentRouteName() == 'Search Result')
+                       
+                    <div id="search" class="container">
+                        <div class="row bg-dark text-white">
+                            <hr class="my-2">
+                            <div class="col-8">Search Results</div>
+                            <div class="col-4">{{ $posts->count() }}</div>
+                            <hr class="my-2">
+                        </div>
+                    </div>
+                    
+                @endif
+                    <div class="row my-2">
                         @php
                         $i=1;
                     @endphp

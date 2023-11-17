@@ -77,6 +77,11 @@
           font-family: 'Vina Sans', cursive;
         }
         </style>
+      @if (Route::currentRouteName() == 'Search Result')
+      <script>
+        window.location.hash = '#search';
+      </script>
+      @endif
     </head>
     <body>
         @include('frontend.theme.menu')
