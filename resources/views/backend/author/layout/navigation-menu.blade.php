@@ -34,7 +34,7 @@
         </a>
         <ul id="forms-nav" class="nav-content @if (Request::route()->getName() != 'author.post' && Request::route()->getName() != 'author.newpost') collapse @endif" data-bs-parent="#sidebar-nav">
           <li>
-            <a class="@if(Request::route()->getName() == 'author.post') active  @endif" href="{{ route(author.post) }}">
+            <a class="@if(Request::route()->getName() == 'author.post') active  @endif" href="{{ route('author.post') }}">
               <i class="bi bi-circle"></i><span>Posts</span>
             </a>
           </li>
