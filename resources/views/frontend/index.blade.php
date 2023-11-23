@@ -14,7 +14,7 @@
         color: rgb(56, 4, 87);
     }
  </style>
-//Made by Rana Bepari
+{{-- Made by Rana Bepari --}}
  <header class="py-5 bg-light border-bottom mb-4">
     <div class="container">
         <div class="text-center my-5">
