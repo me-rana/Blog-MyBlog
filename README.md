@@ -1,8 +1,30 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 # blog_myblog
-A laravel blog website used as a sample of my task
+A laravel blog website used as a sample of my task <br><br>
+<h3>Functionality</h3>
+<li> Authentication -> Admin, Author, Visitor </li>
+<li> Post Functionality (Categorywise) </li>
+<li> Comment Functionality </li>
+<li> Three Different Panel </li>
+<br>
+<h4>Short Description</h4>
+<p> 
+Admin Panel <br>
+-> Can Create, Update or Delete Categories --Any<br>
+-> Can Create, Update or Delete Posts --Any <br>
+-> Can Comment --any ***Author Sign on his Post <br>
+<br>
+Author Panel <br>
+-> Can Create Categories --Any<br>
+-> Can Create, Update or Delete Posts --Only him
+-> Can Comment --any ***Author Sign on his Post<br>
+<br>
+Visitor
+->Can Comment or Reply 
+->Can see where he commented.
+</p>
 
-<a href="https://blog.rana.meranaint.com/">Live Preview of Blog Website</a>
+<a href="https://sample2.ranasvc.com/"><strong> Live Website </strong></a>
 <br> <br> 
 ![Screenshot](images/screenshotx.png)
 
@@ -27,4 +49,4 @@ Password : userx4312 <br>
 
 Thanks, <br>
 Rana Bepari <br>
-<a href="https://rana.meranaint.com/">https://rana.meranaint.com/</a>
+<a href="https://ranasvc.com/"><strong>Official Website</strong></a>
