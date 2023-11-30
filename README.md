@@ -9,22 +9,22 @@ A laravel blog website used as a sample of my task <br><br>
 <br>
 <h4>Short Description</h4>
 <p> 
-Admin Panel <br>
+<strong>Admin Panel</strong> <br>
 -> Can Create, Update or Delete Categories --Any<br>
 -> Can Create, Update or Delete Posts --Any <br>
 -> Can Comment --any ***Author Sign on his Post <br>
 <br>
-Author Panel <br>
+<strong>Author Panel</strong> <br>
 -> Can Create Categories --Any<br>
--> Can Create, Update or Delete Posts --Only him
+-> Can Create, Update or Delete Posts --Only him<br>
 -> Can Comment --any ***Author Sign on his Post<br>
 <br>
-Visitor
-->Can Comment or Reply 
-->Can see where he commented.
+<strong>Visitor</strong><br>
+->Can Comment or Reply <br>
+->Can see where he commented.<br>
 </p>
 
-<a href="https://sample2.ranasvc.com/"><strong> Live Website </strong></a>
+<strong>Live Website : <a href="https://sample2.ranasvc.com/"> https://sample2.ranasvc.com/ </a></strong>
 <br> <br> 
 ![Screenshot](images/screenshotx.png)
 
