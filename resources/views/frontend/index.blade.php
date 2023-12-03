@@ -18,8 +18,8 @@
  <header class="py-5 bg-light border-bottom mb-4">
     <div class="container">
         <div class="text-center my-5">
-            <h1 class="fw-bolder">Welcome to <br><a class="styler" href="https://meranaint.com">MERANA Web Developed</a><br> Website!</h1>
-            <p class="lead mb-0">This Website is developed by <a class="styler" href="https://facebook.com/irana.bpr"><b>Rana Bepari</b></a> <br> <font size="2px">Powered By Laravel and Bootstrap 5</font></p>
+            <h1 class="fw-bolder">Welcome to <br><a class="styler" href="https://ranasvc.com">Rana's Web Development</a><br> Website!</h1>
+            <p class="lead mb-0">This Website is developed by <a class="styler" href="https://www.facebook.com/ranab.me"><b>Rana Bepari</b></a> <br> <font size="2px">Powered By Laravel and Bootstrap 5</font></p>
         </div>
     </div>
 </header>
