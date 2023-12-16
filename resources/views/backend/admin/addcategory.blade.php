@@ -31,7 +31,7 @@
         <div class="container">
             <h3 class="text-center">{{$title ?? ''}}</h3>
             <p class="text-center">With Some Descriptions</p>
-            <form action="../admin/submit-category" method="post" enctype="multipart/form-data">
+            <form action="../../../admin/submit-category" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="cid" value="{{$cid ?? ''}}">
             <div class="mb-3">

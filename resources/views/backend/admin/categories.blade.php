@@ -69,7 +69,7 @@
 
         <td><img height="200px" src='../../{{$row->cat_path}}'> </td>
         <td>
-            <a href="../../admin/update-category/{{$row->id}}" target="_blank" rel="noopener noreferrer"><button class="btn btn-success">Edit</button></a>
+            <a href="../../../admin/update-category/{{$row->id}}" target="_blank" rel="noopener noreferrer"><button class="btn btn-success">Edit</button></a>
             <br> <br>
             <form action="../admin/delete-category/{{$row->id}}" method="post">
             @csrf
