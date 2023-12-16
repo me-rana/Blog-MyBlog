@@ -33,7 +33,9 @@
             <p class="text-center">With Some Descriptions</p>
             <form action="../../../admin/submit-category" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="cid" value="{{$cid ?? ''}}">
+                @if (Route::currentRouteName() == 'admin.updatecategory')
+                  <input type="number" name="catid" value="{{ $category->id }}" hidden>
+                @endif
             <div class="mb-3">
                 <label class="form-label">Category Name</label>
                 <input name="cat_name" id="cat_name" type="text" class="form-control" value="{{$category->cat_name ?? ''}}" placeholder="Category Name">

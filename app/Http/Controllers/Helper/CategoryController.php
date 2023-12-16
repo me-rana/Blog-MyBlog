@@ -46,8 +46,24 @@ class CategoryController extends Controller
         if (!is_null($request->file('image'))){
             $category->cat_path = $this->image_store($request->file('image'), 'public/category');
         }
+
         $category->save();
+      
         return redirect()->back()->with('message','Category added successfully');
+    }
+
+    public function update($request, $datas, $catid){
+        $category = Category::where('id', $catid)->first();
+        foreach ($datas as $data){
+            $category->$data = $request->$data;
+        }
+        if (!is_null($request->file('image'))){
+            $category->cat_path = $this->image_store($request->file('image'), 'public/category');
+        }
+
+        $category->update();
+      
+        return redirect()->back()->with('message','Category updated successfully');
     }
     public function delete($id, $role){
         $category = Category::where('id', $id)->first();

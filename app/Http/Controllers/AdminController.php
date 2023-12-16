@@ -43,7 +43,12 @@ class AdminController extends Controller
     protected function storecategory(Request $req){
         $datas = ['cat_name', 'cat_des', 'cat_slug'];
         $request = new CategoryController();
-        $action = $request->create($req, $datas);
+        if ($req->catid == null){
+            $action = $request->create($req, $datas);
+        }else{
+            $action = $request->update($req, $datas,$req->catid);
+        }
+        
         return $action;
     }
     protected function posts(){
