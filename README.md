@@ -24,7 +24,7 @@ A laravel blog website used as a sample of my task <br><br>
 ->Can see where he commented.<br>
 </p>
 
-<strong>Live Website : <a href="https://myblog-sample.ranasvc.com/"> https://myblog-sample.ranasvc.com/ </a></strong>
+<strong>Live Website : <a href="https://myblog-sample.rana.my.id/"> https://myblog-sample.rana.my.id/ </a></strong>
 <br> <br> 
 ![Screenshot](images/screenshotx.png)
 
